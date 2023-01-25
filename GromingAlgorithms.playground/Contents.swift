@@ -1,5 +1,12 @@
 // MARK: Грокаем алгоритмы
 
+var arrayInt: [Int] = []
+
+for x in 1...200 {
+    arrayInt.append(x)
+}
+arrayInt.sort { $0 < $1 }
+
 // MARK: - Глава 1. Бинарный поиск
 // MARK: Methods for binary search
 
@@ -27,15 +34,6 @@ func binarySearch(_ array: [Int], item: Int) {
         }
     }
 }
-
-var arrayInt: [Int] = []
-
-for x in 1...200 {
-    arrayInt.append(x)
-}
-arrayInt.sort { $0 < $1 }
-
-binarySearch(arrayInt, item: 80)
 
 // MARK: - Глава 2. Сортировка выбором
 // MARK: Function for search smallest value from array
@@ -68,11 +66,8 @@ func seletionSort(_ array: [Int]) -> [Int] {
     return newArray
 }
 
-let arrayInt2: [Int] = [7, 8, 3, 9]
-print(seletionSort(arrayInt2))
-
 // MARK: - Глава 3. Рекурсия
-// MARK: Method recursion
+// MARK: Function recursion
 
 func subtraction(_ value: Int) {
     var value = value
@@ -84,4 +79,67 @@ func subtraction(_ value: Int) {
     }
 }
 
-subtraction(10)
+
+// MARK: -  Глава 4. Быстрая сортировка (Разделяй и Властвуй)
+// MARK: Function for search sum array
+
+func sumArray(_ array: [Int]) -> Int {
+    var array = array
+    var count = 0
+    
+    if !array.isEmpty {
+        count += array[0]
+        array.remove(at: 0)
+        count += sumArray(array)
+    } else {
+        return count
+    }
+    
+    return count
+}
+
+// MARK: Function for search biggest value from array
+
+func searcBigest(_ array: [Int]) -> Int {
+    var biggest = array[0]
+    
+    for element in array {
+        if biggest < element {
+            biggest = element
+        }
+            
+    }
+    return biggest
+}
+
+func quickSort(_ array: [Int]) -> [Int] {
+    var newArray: [Int] = []
+    var array = ints
+
+    if array.count < 2 {
+        newArray = array
+    } else {
+        let referenceValue = array[0]
+        var less: [Int] = []
+        var greater: [Int] = []
+
+        
+        array.remove(at: 0)
+        
+        array.forEach { element in
+            if element < referenceValue {
+                less.append(element)
+            } else {
+                greater.append(element)
+            }
+        }
+        newArray = less + [referenceValue] + greater
+    }
+    
+    return newArray
+}
+
+let ints = [4, 2, 3, 5, 10, 6, 0]
+
+quickSort(ints)
+
